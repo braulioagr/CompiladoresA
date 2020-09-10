@@ -1,0 +1,59 @@
+﻿@model Dictionary<int, Dictionary<string, List<string>>>
+
+<table class="egt" border="1">
+<caption>Tabla Transiciones</caption>
+    <tr>
+        <th align="center">Estados</th align="center">
+        @foreach (var d in (string[])ViewBag.SimbolosGramaticales)
+        {
+
+        <th align="center" style="text-align: center">@d</th>
+    }
+    </tr>
+
+    @{
+        int i;
+        i = 0;
+        foreach (string[] d in (List<string[]>)ViewBag.TablaADF)
+        {
+        <tr>
+            <td align="center"><strong>@i</strong></td>
+            @for (int j = 0; j < d.Length; j++)
+            {
+                <td align="center" style="width: 40px">@d[j]</td>
+            }
+        </tr>
+            i++;
+        }
+    }
+</table>
+<table class="egt" border="1">
+    <caption>Conjunto de elementos Canónicos</caption>
+    <tr>
+        <th align="center">Estado</th>
+        <th align="center" style="text-align: center">Elementos canónicos</th>
+    </tr>
+    @{
+        foreach (var d in Model)
+        {
+            <tr>
+                <td align="center"><strong>I<sub>@d.Key</sub></strong></td>
+                @{
+                    string conjunto = "";
+                    foreach (var d2 in d.Value) {
+                        foreach (string cadena in d2.Value) {
+                            if(d2.Value.First() != cadena) {
+                                conjunto += ", ";
+                            }
+                            conjunto += d2.Key;
+                            conjunto += "->";
+                            conjunto += cadena;
+                        }
+                        conjunto += "\n";
+                    }
+                }
+                <td align="center" style="white-space:pre">@conjunto</td>
+            </tr>
+        }
+    }
+</table>

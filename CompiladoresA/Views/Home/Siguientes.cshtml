@@ -1,0 +1,21 @@
+﻿@model Dictionary<string, List<string>>
+<p>Conjuntos de Siguientes</p>
+@foreach (var d in Model)
+{
+    string valor = "";
+    if (d.Value.Count > 0)
+    {
+        foreach (var v in d.Value)
+        {
+            valor += ", " + v;
+        }
+
+        valor = valor.Substring(2);
+    }
+    valor = "{ " + valor;
+    valor += " }";
+
+    <p>@d.Key - @valor</p>
+
+}
+

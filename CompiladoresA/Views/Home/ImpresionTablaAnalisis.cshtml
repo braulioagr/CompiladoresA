@@ -1,0 +1,27 @@
+﻿
+@model string[,]
+
+<table class="egt" border="1">
+    <caption>Tabla Transiciones</caption>
+    <tr>
+        <th align="center">Estados</th>
+        @foreach (var d in (string[])ViewBag.SimbolosGramaticales)
+        {
+
+            <th align="center" style="text-align: center">@d</th>
+        }
+    </tr>
+
+    @{
+        for(int i = 0; i < ViewBag.TotalEstados; i++)
+        {
+        <tr>
+            <td align="center"><strong>@i</strong></td>
+            @for (int j = 0; j < ViewBag.SimbolosGramaticales.Length; j++)
+            {
+                <td align="center" style="width: 40px">@Model[i, j]</td>
+            }
+        </tr>
+        }
+    }
+</table>

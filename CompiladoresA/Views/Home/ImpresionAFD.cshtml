@@ -1,0 +1,59 @@
+﻿@model Dictionary<int, Dictionary<string, List<string>>>
+
+<table class="egt" border="1">
+    <caption>Automata Finito Determinista</caption>
+    <tr>
+        <th align="center">Estados</thalign="center">
+        @foreach (var d in (string[])ViewBag.SimbolosGramaticales)
+        {
+
+            <th align="center">@d</th>
+        }
+    </tr>
+
+    @{
+            int i;
+            i = 0;
+            foreach (string[] d in (List<string[]>)ViewBag.TablaADF)
+            {
+            <tr>
+                <td align="center">@i</td>
+                @for (int j = 0; j < d.Length; j++)
+                {
+                    <td align="center">@d[j]</td>
+                }
+            </tr>
+                i++;
+            }
+    }
+</table>
+<table class="egt" border="1">
+    <caption>Conjunto de elementos Canonicos</caption>
+    <tr>
+        <th align="center">Estado</th>
+        <th align="center">Elementos canonicos</th>
+    </tr>
+    @{
+        foreach (var d in Model)
+        {
+        <tr>
+            <td align="center">@d.Key</td>
+            @{
+                string conjunto;
+                conjunto = "";
+                foreach (var d2 in d.Value)
+                {
+                    foreach (string cadena in d2.Value)
+                    {
+                        conjunto += ",";
+                        conjunto += d2.Key;
+                        conjunto += "->";
+                        conjunto += cadena;
+                    }
+                }
+            }
+            <td align="center">@conjunto.Substring(1)</td>
+        </tr>
+        }
+    }
+</table>

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg" style="background-color:#1B3257">
+        <div class="mx-auto">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <a class="navbar-brand" href="http://www.uaslp.mx/">
+                        <img id="UASLPLogo" itemprop="image logo" src="~/Images/UASLP.png" style="width:100%" />
+                    </a>
+                </div>
+                <div class="col-md-9" style="color:white">
+                    <h3>COMPILADORES E INTÉRPRETES A</h3>
+                    <h5>Braulio Alejandro García Rivera</h5>
+                    <h5>David Andres Garza Medina</h5>  <!--cambiar por su nombre-->
+                </div>
+            </div>
+            
+        </div>
+    </nav>
+    <div style="margin:10px;">
+        @RenderBody()
+    </div>
+</body>
+</html>

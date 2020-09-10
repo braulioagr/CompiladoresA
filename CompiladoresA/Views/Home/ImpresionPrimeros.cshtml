@@ -1,0 +1,15 @@
+﻿@model Dictionary<string, List<string>>
+<p>Conjuntos de Primeros</p>
+@foreach (var d in Model)
+{
+    string valor;
+    valor = "{";
+    foreach (var v in d.Value)
+    {
+        valor += ", " + v;
+    }
+    valor = valor.Substring(2);
+    valor += "}";
+    <p>@d.Key - @valor</p>
+
+}

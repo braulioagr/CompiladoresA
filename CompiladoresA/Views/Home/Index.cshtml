@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h5>Gramática</h5>
+        @* Entrada de datos multilinea con identificador = gramatica *@
+        <textarea class="w-100" id="gramatica" rows="10"></textarea>
+        <br />
+        <div class="text-right">
+            @* Botón que al dar clic manda llamar a la función enviar() *@
+            <button type="button" class="btn btn-info" style="margin: 10px; width: 45%;height: 40px;float: left;" onclick="enviar()">Enviar</button>
+            <button type="button" class="btn btn-info" style="margin: 10px; width: 45%;height: 40px;float: left;" onclick="calcularPrimeros()">Primeros</button>
+            <button type="button" class="btn btn-info" style="margin: 10px; width: 45%;height: 40px;float: left;" onclick="calcularSiguientes()">Siguientes</button>
+            <button type="button" class="btn btn-info" style="margin: 10px; width: 45%;height: 40px;float: left;" onclick="calcularADF()">Automata LR(0)</button>
+            <button type="button" class="btn btn-info" style="margin: 10px; width: 45%;height: 40px;float: left;" onclick="calculaTabla()">Tabla de Analisis</button>
+        </div>
+        <br />
+        <textarea class="w-100" id="cadena" rows="1"></textarea>
+        <button type="button" class="btn btn-info" style="margin-top: 10px; width: 100%;height: 40px;float: left;" onclick="evaluarCadena()">Evaluar Cadena</button>
+    </div>
+    <div class="col-md-4">
+        <h5>Resultado</h5>
+        @* En este espacio se muestra el resultado que regresa la funcion enviar() *@
+        <div id="resultado"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function enviar()
+    {
+        //obtiene el valor de la entrada multilinea y crea un JSON {"etiqueta":valor, "etiqueta":valor}
+        var datos = { "gramatica": $("#gramatica").val() };
+
+        //llamado a accion de controlador getGramatica
+        $.post("@Url.Action("getGramatica","Home")", datos, function (resultado) {
+            //muestra en div con identificador = resultado lo que regresa la accion de controlador
+            $("#resultado").html(resultado);    //esta como .html() porque regresa código html
+        });
+    }
+
+    function calcularPrimeros()
+    {
+        var datos = { "gramatica": $("#gramatica").val() };
+
+        $.post("@Url.Action("getPrimeros","Home")", datos, function (resultado) {
+            $("#resultado").html(resultado);    //esta como .html() porque regresa código html
+        });
+    }
+
+    function calcularSiguientes()
+    {
+        var datos = { "gramatica": $("#gramatica").val() };
+
+        $.post("@Url.Action("getSiguientes","Home")", datos, function (resultado) {
+            $("#resultado").html(resultado);
+        });
+    }
+    
+    function calcularADF()
+    {
+        var datos = { "gramatica": $("#gramatica").val() };
+
+        $.post("@Url.Action("getADF","Home")", datos, function (resultado) {
+            $("#resultado").html(resultado);
+        });
+    }
+    function calculaTabla()
+    {
+        //obtiene el valor de la entrada multilinea y crea un JSON {"etiqueta":valor, "etiqueta":valor}
+        var datos = { "gramatica": $("#gramatica").val() };
+
+        //llamado a accion de controlador getGramatica
+        $.post("@Url.Action("getTabla","Home")", datos, function (resultado) {
+            //muestra en div con identificador = resultado lo que regresa la accion de controlador
+            $("#resultado").html(resultado);    //esta como .html() porque regresa código html
+        });
+    }
+    
+    function evaluarCadena()
+    {
+        var datos = {
+            "cadena": $("#cadena").val(),
+            "gramatica": $("#gramatica").val()
+        };
+
+        $.post("@Url.Action("getCadena","Home")", datos, function (resultado) {
+            $("#resultado").html(resultado);
+        });
+    }
+</script>
